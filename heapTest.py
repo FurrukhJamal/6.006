@@ -1,4 +1,12 @@
 from heap import Heap
+def testToStringCompleteTree():
+    #data = [1, 2 , 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12, 13, 14 ,15, 16, 17 , 18 ,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+    data = [1, 2 , 3, 4, 5, 6 ,7 ,8]
+    testHeap = Heap(data)
+    test = testHeap.__str__()
+    # print(test)
+    # assert test == "     1 \n    2 3 \n   4 5 \n", "expected output in __str__"
+
 def testGetParent():
     data = [16, 14, 10, 8, 7 , 9, 3, 2, 4, 1]
     testHeap = Heap(data)
@@ -50,6 +58,24 @@ def testMax_heapifyWithOneLeaf():
     assert testHeap.getValue(4) == 7 ; "expected value at A[5] not 7"
     assert testHeap.getValue(9) == 1 ; "expected value of 1 at A[9] not returned"
 
+
+def testMin_heapify():
+    data = [1, 4, 3, 2, 5, 6, 7]
+    testHeap = Heap(data)
+    testHeap.min_Heapify(2)
+    assert testHeap.getValue(1) == 2 ; "expected value at A[1] not 2"
+    assert testHeap.getValue(3) == 4 ; "expected value at A[3] not 4"
+
+def testMin_HeapifyWithOneLeaf():
+    data = [1, 8, 3, 2, 5, 6, 7, 4]
+    testHeap = Heap(data)
+    testHeap.min_Heapify(2)
+    # print(testHeap)
+    assert testHeap.getValue(1) == 2 ; "expected value at A[1] not 2"
+    assert testHeap.getValue(3) == 4 ; "expected value at A[3] not 4"
+    assert testHeap.getValue(7) == 8 ; "expected value at A[7] not 8"
+
+
 def testBuildHeap():
     data = [4,1,3,2,16,9,10,14,8,7]
     testHeap = Heap(data)
@@ -67,10 +93,49 @@ def testBuildHeap():
     assert maxHeap[8] == 4
     assert maxHeap[9] == 1
 
+def testBuildMinHeap():
+    data = [4,1,3,2,16,9,10,14,8,7]
+    testHeap = Heap(data)
+    testHeap.buildMinHeap()
+    maxHeap = testHeap.getHeapArray()
+    # print(testHeap)
+    assert maxHeap[0] == 1 , "unexpected output"
+    assert maxHeap[1] ==  2, "unexpected output"
+    assert maxHeap[2] ==  3, "unexpected output"
+    assert maxHeap[3] ==  4, "unexpected output"
+    assert maxHeap[4] ==  7, "unexpected output"
+    assert maxHeap[5] ==  9, "unexpected output"
+    assert maxHeap[6] ==  10, "unexpected output"
+    assert maxHeap[7] ==  14, "unexpected output"
+    assert maxHeap[8] ==  8, "unexpected output"
+    assert maxHeap[9] ==  16, "unexpected output"
+
+def testHeapMinSort():
+    data = [4,1,3,2,16,9,10,14,8,7]
+    testHeap = Heap(data)
+    heapSorted = testHeap.heapSort("min")
+    # print(heapSorted)
+    assert heapSorted[0] == 1 ; "expected heapsorted value not returned"
+    assert heapSorted[1] == 2 ; "expected heapsorted value not returned"
+    assert heapSorted[2] == 3 ; "expected heapsorted value not returned"
+    assert heapSorted[3] == 4 ; "expected heapsorted value not returned"
+    assert heapSorted[4] == 7 ; "expected heapsorted value not returned"
+    assert heapSorted[5] == 8 ; "expected heapsorted value not returned"
+    assert heapSorted[6] == 9 ; "expected heapsorted value not returned"
+    assert heapSorted[7] == 10 ; "expected heapsorted value not returned"
+    assert heapSorted[8] == 14 ; "expected heapsorted value not returned"
+    assert heapSorted[9] == 16 ; "expected heapsorted value not returned"
+
+def testMaxHeapifyWithTwoElementsAndRootMax():
+    data = [2,1]
+    testHeap = Heap(data)
+    testHeap.max_Heapify(1)
+    assert testHeap.getValue(0) == 2 , "expected out put for max_heapify when len== 2 and max at root"
+
 def testHeapSort():
     data = [1, 2 ,3 ,5 ,4 ,6 ,7 ,8 ,9 ,10]
     testHeap = Heap(data)
-    heapSorted = testHeap.heapSort()
+    heapSorted = testHeap.heapSort("max")
     assert heapSorted[0] == 10 ; "expected heapsorted value not returned"
     assert heapSorted[1] == 9 ; "expected heapsorted value not returned"
     assert heapSorted[2] == 8 ; "expected heapsorted value not returned"
@@ -90,6 +155,12 @@ def main():
     testBuildHeap()
     testMax_heapifyWithOneLeaf()
     testHeapSort()
+    testMin_heapify()
+    testMin_HeapifyWithOneLeaf()
+    testToStringCompleteTree()
+    testBuildMinHeap()
+    testHeapMinSort()
+    testMaxHeapifyWithTwoElementsAndRootMax()
 
 
 if __name__ == "__main__":
