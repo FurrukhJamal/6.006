@@ -147,20 +147,39 @@ def testHeapSort():
     assert heapSorted[8] == 2 ; "expected heapsorted value not returned"
     assert heapSorted[9] == 1 ; "expected heapsorted value not returned"
 
+def testInsertAsMin():
+    data = [1, 2, 3 , 4, 7, 9, 10,14, 8 ,16]
+    data.reverse()
+    testHeap = Heap([])
+    for val in data:
+        testHeap.insert(val)
+    
+    assert testHeap.getValue(0) == 1 ,"expected value after insert"
+    assert testHeap.getValue(1) == 2 ,"expected value after insert"
+    assert testHeap.getValue(2) == 7 ,"expected value after insert"
+    assert testHeap.getValue(3) == 4 ,"expected value after insert"
+    assert testHeap.getValue(4) == 3 ,"expected value after insert"
+    assert testHeap.getValue(5) == 14 ,"expected value after insert"
+    assert testHeap.getValue(6) == 8 ,"expected value after insert"
+    assert testHeap.getValue(7) == 16 ,"expected value after insert"
+    assert testHeap.getValue(8) == 9 ,"expected value after insert"
+    assert testHeap.getValue(9) == 10 ,"expected value after insert"
+
 def main():
-    testGetParent()
-    testGetParent()
-    testMax_heapify()
-    testChildofLeaf()
-    testBuildHeap()
-    testMax_heapifyWithOneLeaf()
-    testHeapSort()
-    testMin_heapify()
-    testMin_HeapifyWithOneLeaf()
-    testToStringCompleteTree()
-    testBuildMinHeap()
-    testHeapMinSort()
-    testMaxHeapifyWithTwoElementsAndRootMax()
+    # testGetParent()
+    # testGetParent()
+    # testMax_heapify()
+    # testChildofLeaf()
+    # testBuildHeap()
+    # testMax_heapifyWithOneLeaf()
+    # testHeapSort()
+    # testMin_heapify()
+    # testMin_HeapifyWithOneLeaf()
+    # testToStringCompleteTree()
+    # testBuildMinHeap()
+    # testHeapMinSort()
+    # testMaxHeapifyWithTwoElementsAndRootMax()
+    testInsertAsMin()
 
 
 if __name__ == "__main__":

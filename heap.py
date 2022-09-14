@@ -6,6 +6,8 @@ class Heap(object):
         self.array = array
         self.original = array[:]
     def __str__(self):
+        if len(self.array) == 0 :
+            return "[]"
         counterForLastLevel = 0
         numOfLevels =math.floor(math.log2(len(self.array))) + 1
         # print(f" num of levels: {numOfLevels}")
@@ -45,6 +47,7 @@ class Heap(object):
             treeString += strng + "\n"
         return treeString
 
+    """assumes a zero indexed index"""
     def getParentIndex(self, index):
         if index == 0:
             return index
@@ -139,14 +142,23 @@ class Heap(object):
             return 
 
         # print(f"right : {right} left :{left} index : {index}")
-        
+        flag = False
         #for getValue index - 1 is used cuz index in the method is 1-indexed
         if(left <= len(self.array) and self.getValue(index - 1) > self.getValue(left)):
             smallest = left
+            flag = True
         # check for a node that has just one child node
         if right != None:
-            if(right <= len(self.array) and self.getValue(smallest) > self.getValue(right)):
-                smallest = right
+            #Bug Fix
+            if flag :       
+                if(right <= len(self.array) and self.getValue(smallest) > self.getValue(right)):
+                    smallest = right
+            else : 
+                if(right <= len(self.array) and self.getValue(smallest - 1) > self.getValue(right)):
+                    smallest = right
+
+        
+            #end Bug Fix
         
         # print(f"index : {index} smallest : {smallest}")
         
@@ -178,6 +190,12 @@ class Heap(object):
         else :
             return
 
+    
+    def insert(self, item):
+        # print(f"adding : {item}")
+        self.array.append(item)
+        self.buildMinHeap()
+
                 
     
     def buildMaxHeap(self):
@@ -189,6 +207,7 @@ class Heap(object):
 
     def buildMinHeap(self):
         for i in range(len(self.array)//2 , 0 , -1):
+            # print(f"Heapify-Index : {i}")
             self.min_Heapify(i)
         
         return self.array
