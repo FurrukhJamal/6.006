@@ -198,24 +198,24 @@ class Heap(object):
 
 
     def insert(self, item):
-        print(f"adding item : {item}")
+        # print(f"adding item : {item}")
         self.array.append(item)
         self.shiftUpMin(len(self.array))
-        print(self)
+        # print(self)
 
     #assumes 1-indexed index
     def shiftUpMin(self,index):
-        print(f"index in shiftUp : {index}")
+        # print(f"index in shiftUp : {index}")
         if index == 1:
             return 
         
         parent = index//2
-        print(f"parent : {parent}")
+        # print(f"parent : {parent}")
 
         if self.array[index - 1] < self.array[parent - 1] :
-            print(f"self.array[index - 1] : {self.array[index - 1]} self.array[parent - 1] : {self.array[parent - 1] }")
+            # print(f"self.array[index - 1] : {self.array[index - 1]} self.array[parent - 1] : {self.array[parent - 1] }")
             self.array[index - 1], self.array[parent - 1] = self.array[parent - 1], self.array[index - 1]
-            print(f"self.array[index - 1] : {self.array[index - 1]} self.array[parent - 1] : {self.array[parent - 1] }")
+            # print(f"self.array[index - 1] : {self.array[index - 1]} self.array[parent - 1] : {self.array[parent - 1] }")
            
             self.shiftUpMin(parent)
         else : 
